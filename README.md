@@ -1,3 +1,3 @@
-ครั้งตอนการใช้งานจะต้องเข้าไปใน robot_wa โดยใช้คำสั่ง cd robot/ ใน Terminal
+ครั้งตอนการใช้งานจะต้องเข้าไปใน robot_wa โดยใช้คำสั่ง cd robot/ ใน Terminal/s
 ต่อไปใช้คำสั่ง ros2 launch articubot_one launch_sim.launch.py ใน Terminal เพื่อเปิดหุ่นยนต์ขึ้นมาพร้อม Gazebo
 ต่อไปใช้คำสั่ง ros2 run articubot_one ใน Terminal เพื่อบังคับหุ่นยนต์ใน Gazebo
