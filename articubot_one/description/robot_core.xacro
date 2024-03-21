@@ -1,0 +1,344 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+    <xacro:include filename="inertial_macros.xacro" />
+    
+    <material name="white">
+        <color rgba="1 1 1 1" />
+    </material>
+
+    <material name="orange">
+        <color rgba="1 0.3 0.1 1"/>
+    </material>
+
+    <material name="blue">
+        <color rgba="0.2 0.2 1 1"/>
+    </material>
+
+    <material name="black">
+        <color rgba="0 0 0 1"/>
+    </material>
+
+    <material name="red">
+        <color rgba="1 0 0 1"/>
+    </material>
+
+    <!-- BASE LINK -->
+
+    <link name="base_link">
+
+    </link>
+
+    <joint name="chassis_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="chassis"/>
+        <origin xyz="0 0 0.1"/>
+    </joint> 
+
+    <link name="chassis">
+        <visual>
+            <origin xyz="-1.25 1.5 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="file://$(find articubot_one)/description/dae/mainbody.dae" scale="0.01 0.01 0.01"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+        <collision>
+            <origin xyz="-1.25 1.5 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="file://$(find articubot_one)/description/dae/mainbody.dae" scale="0.01 0.01 0.01"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_box mass="50.0" x="2.5" y="2.8" z="0.8">
+            <origin xyz="0 0.1 0.5" rpy="0 0 0"/>
+        </xacro:inertial_box>
+    </link>
+    <gazebo reference="chassis">
+        <material>Gazebo/white</material>
+    </gazebo>
+
+
+    <!-- LEFT WHEEL -->
+
+    <joint name="left_wheel_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="left_wheel"/>
+        <origin xyz="-0.9 1.05 0.35"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="left_wheel">
+        <visual>
+            <origin xyz="0.15 -0.35 -0.35" rpy="0 -1.57 0"/>
+            <geometry>
+                <mesh filename="file://$(find articubot_one)/description/dae/wheel.dae" scale="0.01 0.01 0.01"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+        <collision>
+            <origin xyz="0.15 -0.35 -0.35" rpy="0 -1.57 0"/>
+            <geometry>
+                <mesh filename="file://$(find articubot_one)/description/dae/wheel.dae" scale="0.01 0.01 0.01"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_cylinder mass="20.0" length="0.3" radius="0.35">
+            <origin xyz="0 0 0" rpy="0 -1.57 0"/>
+        </xacro:inertial_cylinder>
+    </link>
+    <gazebo reference="left_wheel">
+        <material>Gazebo/Blue</material>
+        <mu1 value="1.8"/>
+        <mu2 value="1.8"/>
+    </gazebo>
+
+    <!-- RIGHT WHEEL -->
+
+    <joint name="right_wheel_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="right_wheel"/>
+        <origin xyz="0.9 1.05 0.35"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="right_wheel">
+        <visual>
+            <origin xyz="0.15 -0.35 -0.35" rpy="0 -1.57 0"/>
+            <geometry>
+                <mesh filename="file://$(find articubot_one)/description/dae/wheel.dae" scale="0.01 0.01 0.01"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+        <collision>
+            <origin xyz="0.15 -0.35 -0.35" rpy="0 -1.57 0"/>
+            <geometry>
+                <mesh filename="file://$(find articubot_one)/description/dae/wheel.dae" scale="0.01 0.01 0.01"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_cylinder mass="20.0" length="0.3" radius="0.35">
+            <origin xyz="0 0 0" rpy="0 -1.57 0"/>
+        </xacro:inertial_cylinder>
+    </link>
+    <gazebo reference="right_wheel">
+        <material>Gazebo/Blue</material>
+        <mu1 value="1.8"/>
+        <mu2 value="1.8"/>
+    </gazebo>
+
+    <!-- CASTER WHEEL -->
+
+    <joint name="casterL_wheel_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="casterL_wheel"/>
+        <origin xyz="0.85 -0.9 0.1" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="casterL_wheel">
+        <visual>
+            <geometry>
+                <sphere radius="0.1" />
+            </geometry>
+            <material name="white"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <sphere radius="0.1" />
+            </geometry>
+        </collision>
+        <xacro:inertial_sphere mass="2.0" radius="0.1">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_sphere>
+    </link>
+    <gazebo reference="casterL_wheel">
+        <material>Gazebo/Blue</material>
+        <mu1 value="1.8"/>
+        <mu2 value="1.8"/>
+    </gazebo>
+
+    <!-- CASTER WHEEL -->
+
+    <joint name="casterR_wheel_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="casterR_wheel"/>
+        <origin xyz="-0.85 -0.9 0.1" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="casterR_wheel">
+        <visual>
+            <geometry>
+                <sphere radius="0.1" />
+            </geometry>
+            <material name="white"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <sphere radius="0.1" />
+            </geometry>
+        </collision>
+        <xacro:inertial_sphere mass="2.0" radius="0.1">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_sphere>
+    </link>
+    <gazebo reference="casterR_wheel">
+        <material>Gazebo/Blue</material>
+        <mu1 value="1.8"/>
+        <mu2 value="1.8"/>
+    </gazebo>
+
+
+    <!-- ARM 1 -->
+
+    <joint name="arm1_joint" type="revolute">
+        <parent link="base_link"/>
+        <limit effort="1000.0" lower="0.0" upper="3.12" velocity="0.5"/>
+        <child link="arm1"/>
+        <origin xyz="-0.005 0.97 0.91"/>
+        <axis xyz="0 0 1"/>
+        <dynamics damping="1" friction="1"/>
+    </joint>
+
+    <link name="arm1">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="file://$(find articubot_one)/description/dae/arm1.dae" scale="0.01 0.01 0.01"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="file://$(find articubot_one)/description/dae/arm1.dae" scale="0.01 0.01 0.01"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_box mass="0.01" x="0.6" y="0.5" z="1.4">
+            <origin xyz="0 0.01 0.8" rpy="0 0 0"/>
+        </xacro:inertial_box>
+    </link>
+
+    <!-- box -->
+
+    <joint name="box_joint" type="prismatic">
+        <parent link="arm1"/>
+        <child link="box"/>
+        <origin xyz="0 0 0.25"/>
+        <limit effort="1000.0" lower="0.1" upper="1" velocity="0.5"/>
+        <axis xyz="0 0 1"/>
+        <dynamics damping="1" friction="15"/>
+    </joint>
+
+    <link name="box">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.2 0.2 0.2"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.6 0.5 0.5"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_box mass="0.01" x="0.5" y="0.5" z="0.1">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_box>
+    </link>
+
+    <!-- ARM 3 -->
+
+    <joint name="arm3_joint" type="prismatic">
+        <parent link="box"/>
+        <child link="arm3"/>
+        <origin xyz="0 0 -0.25"/>
+        <limit effort="1000.0" lower="0.2" upper="0.8" velocity="0.5"/>
+        <axis xyz="0 1 0"/>
+        <dynamics damping="1" friction="5"/>
+    </joint>
+
+    <link name="arm3">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="file://$(find articubot_one)/description/dae/arm3.dae" scale="0.01 0.01 0.01"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="file://$(find articubot_one)/description/dae/arm3.dae" scale="0.01 0.01 0.01"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_box mass="0.01" x="0.4" y="2.5" z="0.4">
+            <origin xyz="0 -1 0.2" rpy="0 0 0"/>
+        </xacro:inertial_box>
+    </link>
+
+    <!-- ARM 2.1 -->
+
+    <joint name="arm2-1_joint" type="revolute">
+        <parent link="arm3"/>
+        <child link="arm2-1"/>
+        <origin xyz="0.1 -1.4 0.07"/>
+        <limit effort="1000.0" lower="-1" upper="0" velocity="0.5"/>
+        <axis xyz="0 1 0"/>
+        <dynamics damping="0" friction="0"/>
+    </joint>
+
+    <link name="arm2-1">
+        <visual>
+            <origin xyz="0 0 0" rpy="1.57 0 0"/>
+            <geometry>
+                <mesh filename="file://$(find articubot_one)/description/dae/arm2.dae" scale="0.01 0.01 0.01"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="1.57 0 0"/>
+            <geometry>
+                <mesh filename="file://$(find articubot_one)/description/dae/arm2.dae" scale="0.01 0.01 0.01"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_box mass="0.01" x="0.45" y="0.81" z="0.55">
+            <origin xyz="0.15 -0.4 -0.25" rpy="0 0 0"/>
+        </xacro:inertial_box>
+    </link>
+
+    <!-- ARM 2.2 -->
+
+    <joint name="arm2-2_joint" type="revolute">
+        <parent link="arm3"/>
+        <child link="arm2-2"/>
+        <origin xyz="-0.1 -2.2 0.07"/>
+        <limit effort="1000.0" lower="0" upper="1" velocity="0.5"/>
+        <axis xyz="0 1 0"/>
+        <dynamics damping="0" friction="0"/>
+    </joint>
+
+    <link name="arm2-2">
+        <visual>
+            <origin xyz="0 0 0" rpy="1.57 0 3.14"/>
+            <geometry>
+                <mesh filename="file://$(find articubot_one)/description/dae/arm2.dae" scale="0.01 0.01 0.01"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="1.57 0 3.14"/>
+            <geometry>
+                <mesh filename="file://$(find articubot_one)/description/dae/arm2.dae" scale="0.01 0.01 0.01"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_box mass="0.01" x="0.45" y="0.81" z="0.55">
+            <origin xyz="-0.15 0.4 -0.25" rpy="0 0 0"/>
+        </xacro:inertial_box>
+    </link>
+
+
+
+
+</robot>
